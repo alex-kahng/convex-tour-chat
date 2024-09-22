@@ -36,11 +36,11 @@ export const send = mutation({
     // Send a new message.
     await ctx.db.insert("messages", { body, author });
 
-    // if (body.startsWith("@ai") && author !== "AI") {
-    //   await ctx.scheduler.runAfter(0, api.ai.chat, {
-    //     messageBody: body,
-    //   });
-    // }
+    if (body.startsWith("@ai") && author !== "AI") {
+      await ctx.scheduler.runAfter(0, api.ai.chat, {
+        messageBody: body,
+      });
+    }
   },
 });
 
